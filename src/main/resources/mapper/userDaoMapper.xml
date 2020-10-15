@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ckglixt.dao.userMapper">
+
+    <!--根据用户账号查询用户信息-->
+    <select id="findByName" parameterType="java.lang.String" resultType="com.example.ckglixt.dto.userDTO">
+	    SELECT
+	    USER_ID userID,
+		USER_USERNAME userName,
+		USER_PASSWORD userPassWord
+		FROM
+		ck_user where USER_USERNAME = #{value}
+	</select>
+
+	<!--根据用户id查询用户信息-->
+	<select id="findById" parameterType="java.lang.String" resultType="com.example.ckglixt.dto.userDTO">
+	    SELECT
+	    USER_ID userID,
+		USER_USERNAME userName,
+		USER_PASSWORD userPassWord
+		FROM
+		ck_user where USER_ID = #{value}
+	</select>
+
+	<!--用户注册-->
+	<select id="insert" parameterType="com.example.ckglixt.dto.userDTO" resultType="java.lang.Integer">
+	    insert into ck_user
+        (
+        USER_ID,
+         USER_USERNAME,
+         USER_PASSWORD)
+        values
+           (
+           #{userID},
+            #{userName},
+            #{userPassWord})
+	</select>
+
+	<!--删除用-->
+	<delete id="deleteUser" parameterType="com.example.ckglixt.dto.userDTO">
+	delete from
+	company_employee
+	where
+	id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,42 @@
+/*body{*/
+/*    background-image: url("../image/login.jpg");*/
+/*}*/
+/*#login-box{*/
+/*    width:30%;*/
+/*    height:auto;*/
+/*    border:3px solid #eeeeee00;*/
+/*    margin:0px auto;*/
+/*    margin-top: 15%;*/
+/*    text-align: center;*/
+/*    background-color: #00000080;*/
+/*}*/
+/*#login-box h1{*/
+/*    font-size:60px;*/
+/*    font-family: "华文隶书";*/
+/*    color:#ffffff;*/
+/*}*/
+/*#login-box i{*/
+/*    font-size: 20px;*/
+/*    color: #ffffff;*/
+/*}*/
+/*#login-box .form .item input{*/
+/*    border:0px;*/
+/*    border-bottom: 2px solid #ffffff;*/
+/*    font-size: 17px;*/
+/*    padding: 5px 10px;*/
+/*    margin-bottom: 10px;*/
+/*    background-color: #00000000;*/
+/*    color: white;*/
+/*}*/
+/*input::-webkit-input-placeholder{*/
+/*    color:#ffffff90;*/
+/*    font-size: 17px;*/
+/*}*/
+/*#login-box button{*/
+/*    width:200px;*/
+/*    height: 40px;*/
+/*    margin:20px auto;*/
+/*    font-size: 20px;*/
+/*    border-radius: 15px;*/
+/*    background-image: linear-gradient(to right, #16cbf8 0%, #e316f8 100%);*/
+/*}*/
