@@ -10,7 +10,7 @@ public enum ResponceDataState {
     /**
      * 操作成功
      */
-    SUCCESS(0),
+    SUCCESS(201),
 
     /**
      * 服务繁忙

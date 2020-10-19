@@ -5,42 +5,120 @@
     <!--根据用户账号查询用户信息-->
     <select id="findByName" parameterType="java.lang.String" resultType="com.example.ckglixt.dto.userDTO">
 	    SELECT
-	    USER_ID userID,
-		USER_USERNAME userName,
-		USER_PASSWORD userPassWord
+	    user_id userID,
+		user_accout userName,
+		user_password userPassWord
 		FROM
-		ck_user where USER_USERNAME = #{value}
-	</select>
-
-	<!--根据用户id查询用户信息-->
-	<select id="findById" parameterType="java.lang.String" resultType="com.example.ckglixt.dto.userDTO">
-	    SELECT
-	    USER_ID userID,
-		USER_USERNAME userName,
-		USER_PASSWORD userPassWord
-		FROM
-		ck_user where USER_ID = #{value}
+		user
+		where user_accout = #{value}
 	</select>
 
 	<!--用户注册-->
-	<select id="insert" parameterType="com.example.ckglixt.dto.userDTO" resultType="java.lang.Integer">
-	    insert into ck_user
+	<insert id="insert" parameterType="com.example.ckglixt.requestDTO.RegisterRequestDTO">
+	    insert into user
         (
-        USER_ID,
-         USER_USERNAME,
-         USER_PASSWORD)
+        user_id,
+        user_accout,
+        user_password,
+        user_name,
+        user_sex ,
+        user_phone,
+        user_role
+         )
         values
            (
            #{userID},
-            #{userName},
-            #{userPassWord})
-	</select>
+           #{userAccout},
+           #{userPassWord},
+           #{userName},
+           #{userSex},
+           #{userPhone},
+           #{role}
+            )
+	</insert>
 
-	<!--删除用-->
+	<!--删除用户-->
 	<delete id="deleteUser" parameterType="com.example.ckglixt.dto.userDTO">
 	delete from
-	company_employee
+	user
 	where
-	id = #{id}
+	user_id = #{id}
 	</delete>
+
+	<!--查找用户是否存在-->
+	<select id="findUserAcout" parameterType="com.example.ckglixt.dto.userDTO" resultType="java.lang.Integer">
+	select
+	count(*)
+	from
+	user
+	where
+	user_accout = #{userAcout}
+	</select>
+
+	<!--用户新增-->
+	<insert id="addUser" parameterType="com.example.ckglixt.requestDTO.RegisterRequestDTO">
+	    insert into user
+        (
+        user_id,
+        user_accout,
+        user_password,
+        user_name,
+        user_sex ,
+        user_phone,
+        user_role
+         )
+        values
+           (
+           #{userID},
+           #{userAccout},
+           #{userPassWord},
+           #{userName},
+           #{userSex},
+           #{userPhone},
+           #{role}
+            )
+	</insert>
+
+	<!--用户修改-->
+	<insert id="updateUser" parameterType="com.example.ckglixt.requestDTO.RegisterRequestDTO">
+	    update user
+	    set
+	    user_password = #{userPassWord},
+	    user_name = #{userName},
+	    user_sex = #{userSex},
+	    user_phone = #{userPhone}
+	    where
+	    user_id = #{userID}
+	</insert>
+
+	<!--查询用户详情-->
+	<select id="getUserDetail" parameterType="java.lang.String" resultType="com.example.ckglixt.requestDTO.RegisterRequestDTO">
+	select
+		user_id  		userID,
+        user_accout 	userAccout,
+        user_password	userPassWord,
+        user_name		userName,
+        user_sex 		userSex,
+        user_phone		userPhone,
+        user_role		role
+	from
+		user
+	where
+		user_id = #{userID}
+	</select>
+
+	<!--查询用户详情-->
+	<select id="listUsers" resultType="com.example.ckglixt.requestDTO.RegisterRequestDTO">
+	select
+		user_id  		userID,
+        user_accout 	userAccout,
+        user_password	userPassWord,
+        user_name		userName,
+        user_sex 		userSex,
+        user_phone		userPhone,
+        user_role		role
+	from
+		user
+	</select>
+
 </mapper>

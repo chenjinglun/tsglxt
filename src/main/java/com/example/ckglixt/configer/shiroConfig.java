@@ -54,11 +54,9 @@ public class shiroConfig {
         filterMap.put("/Api/autherror", "anon");
         filterMap.put("/Api/getImage", "anon");
         filterMap.put("/Api/register", "anon");
+        filterMap.put("/Api/out", "authc");
         filterMap.put("/Api/user/deleteUser","authc");
-
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
-
-
         return shiroFilterFactoryBean;
     }
 

@@ -1,6 +1,7 @@
 package com.example.ckglixt.web.rt;
 
 import com.example.ckglixt.dto.userDTO;
+import com.example.ckglixt.requestDTO.RegisterRequestDTO;
 import com.example.ckglixt.service.userService;
 import com.example.ckglixt.utils.RandomServlet;
 import com.example.ckglixt.utils.ResponceData;
@@ -31,9 +32,9 @@ import java.util.UUID;
 @Api(value = "图书管理系统登陆接口")
 @RequestMapping("/Api")
 @CrossOrigin
-public class UserController {
+public class LoginController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private userService userSerivce;
@@ -43,7 +44,8 @@ public class UserController {
      * 注销
      * @return
      */
-    @RequestMapping("/out")
+    @GetMapping("/out")
+    @ApiOperation(value="注销", notes="返回注销成功信息")
     public ResponceData doLogOut(){
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
@@ -54,7 +56,7 @@ public class UserController {
      * @param code
      * @return
      */
-    @GetMapping(value = "/autherror")
+    @PostMapping(value = "/autherror")
     @ApiOperation(value="设置未登录未授权跳转页", notes="无需使用")
     public String autherror(int code){
         return  code == 1?"未登录啦":"未授权哦";
@@ -119,18 +121,20 @@ public class UserController {
      * 注册（也做的，但是用不上）
      */
     @PostMapping(value = "/register")
-    public ResponceData register(userDTO userDTO ,String code,HttpSession session){
-        System.out.println("进入这里：---------------------");
-        /**
-         * 对密码进行加密校验
-         */
-        Md5Hash md5Hash2 = new Md5Hash(userDTO.getUserPassWord(),"xo*7ps",1024);
-        userDTO.setUserPassWord(md5Hash2.toString());
-        userDTO.setUserID(UUID.randomUUID().toString());
+    @ApiOperation(value="账号登陆", notes="没有返回值")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", name = "id", value = "用户id", required = false, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "userAccout", value = "用户账号", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "userPassWord", value = "用户密码", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "userName", value = "用户名名称", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "userSex", value = "用户性别：0男1女", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "userPhone", value = "手机号", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "role", value = "0为超级管理员，1为管理员，2为客户", required = false, dataType = "String")
+    })
+    public ResponceData register(RegisterRequestDTO registerRequestDTO){
         //3.执行保存方法
         try {
-            Integer success = userSerivce.insert(userDTO);
-            return ResponceData.success("注册成功");
+            return userSerivce.insert(registerRequestDTO);
         }catch (Exception e){
             e.printStackTrace();
             return ResponceData.bizError("注册失败");

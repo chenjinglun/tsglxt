@@ -50,18 +50,14 @@ public class shirorealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
-//        System.out.println("执行认证逻辑");
         //编写shiro判断逻辑，判断用户名和密码
         //1.判断用户名
         UsernamePasswordToken token = (UsernamePasswordToken)arg0;
-//        System.out.println("++++++++++++++++"+token.getUsername());
-//        System.out.println("++++++++++++++++"+token.getPassword());
         userDTO user = userSerivce.findByName(token.getUsername());
         if(user==null){
             //用户名不存在
             return null;//shiro底层会抛出UnKnowAccountException
         }
-
         //2.判断密码
         return new SimpleAuthenticationInfo(user,user.getUserPassWord(),"");
     }

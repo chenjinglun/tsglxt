@@ -1,5 +1,6 @@
 package com.example.ckglixt.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,13 @@ import java.io.Serializable;
 @AllArgsConstructor
 @ToString
 public class userDTO implements Serializable, AuthCachePrincipal {
+    @ApiModelProperty(value = "用户id")
     private String userID;
+
+    @ApiModelProperty(value = "用户账号")
     private String userName;
+
+    @ApiModelProperty(value = "用户密码")
     private String userPassWord;
 
     @Override
