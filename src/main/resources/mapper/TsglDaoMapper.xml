@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ckglixt.dao.TsglMapper">
+<!--    &lt;!&ndash;根据编号或者名称判断图书是否存在&ndash;&gt;-->
+<!--    <select id="findEixtTs" parameterType="java.lang.String" resultType="java.lang.Integer">-->
+<!--	    SELECT-->
+<!--	    count(*)-->
+<!--		FROM-->
+<!--		book-->
+<!--		where-->
+<!--		name = #{Name}-->
+<!--		or-->
+<!--		no =#{No}-->
+<!--	</select>-->
+
+<!--    &lt;!&ndash;根据ID查找图书&ndash;&gt;-->
+<!--    <select id="findTsByIdl" parameterType="java.lang.String" resultType="java.lang.Integer">-->
+<!--	    SELECT-->
+<!--	    count(*)-->
+<!--		FROM-->
+<!--		book-->
+<!--		where-->
+<!--		id= #{id}-->
+<!--	</select>-->
+
+<!--    &lt;!&ndash;新增图书分类&ndash;&gt;-->
+<!--    <select id="addTsfl" parameterType="com.example.tushu.entity.TsglAddEntity">-->
+<!--	    insert into book-->
+<!--        (-->
+<!--         id,-->
+<!--         no,-->
+<!--         type_no,-->
+<!--         name,-->
+<!--         price,-->
+<!--         pub_time,-->
+<!--         author,-->
+<!--         pub_company-->
+<!--         )-->
+<!--        values-->
+<!--           (-->
+<!--           	#{id},-->
+<!--            #{No},-->
+<!--            #{tpyeNo},-->
+<!--            #{Name},-->
+<!--            #{price},-->
+<!--            #{pubTime2},-->
+<!--            #{Author},-->
+<!--            #{pubCompany}-->
+<!--            )-->
+<!--	</select>-->
+
+<!--    &lt;!&ndash;删除图书&ndash;&gt;-->
+<!--    <select id="deleteTs" parameterType="com.example.tushu.entity.TsglDeleteEntity">-->
+<!--	    delete from-->
+<!--	    book-->
+<!--	    where-->
+<!--	    id = #{id}-->
+<!--	</select>-->
+
+<!--    <select id="ListOfTs" resultType="com.example.tushu.entity.TsglAddEntity">-->
+<!--	    select-->
+<!--	     id id ,-->
+<!--         no No,-->
+<!--         type_no tpyeNo,-->
+<!--         name Name,-->
+<!--         price price,-->
+<!--         pub_time pubTime2,-->
+<!--         author Author,-->
+<!--         pub_company pubCompany-->
+<!--	    from-->
+<!--	    book-->
+<!--	</select>-->
+
+<!--    &lt;!&ndash;根据名称是否重复&ndash;&gt;-->
+<!--    <select id="judgeRepeat1" parameterType="java.lang.String" resultType="java.lang.Integer">-->
+<!--	    select-->
+<!--	    count(*)-->
+<!--	    from-->
+<!--	    book-->
+<!--		WHERE-->
+<!--		id != #{id}-->
+<!--		and-->
+<!--		name = #{Name}-->
+<!--	</select>-->
+
+<!--    &lt;!&ndash;根据编号是否重复&ndash;&gt;-->
+<!--    <select id="judgeRepeat2" parameterType="java.lang.String" resultType="java.lang.Integer">-->
+<!--	    select-->
+<!--	    count(*)-->
+<!--	    from-->
+<!--	    book-->
+<!--		WHERE-->
+<!--		id != #{id}-->
+<!--		and-->
+<!--		no = #{No}-->
+<!--	</select>-->
+
+<!--    &lt;!&ndash;修改图书分类&ndash;&gt;-->
+<!--    <select id="updateTs" parameterType="com.example.tushu.entity.TsglAddEntity">-->
+<!--	    update-->
+<!--        book-->
+<!--        set-->
+<!--        id   = #{id},-->
+<!--         no   = #{No},-->
+<!--         type_no = #{tpyeNo},-->
+<!--         name = #{Name},-->
+<!--         price = #{price},-->
+<!--         pub_time = #{pubTime2},-->
+<!--         author = #{Author},-->
+<!--         pub_company = #{pubCompany}-->
+<!--        where-->
+<!--        id = #{id}-->
+<!--	</select>-->
+
+	<!--采购图书-->
+	<insert id="addTs" parameterType="java.util.List">
+		insert into cg_book
+		(
+		id,
+		book_name,
+		create_time,
+		num,
+		book_in_type,
+		price,
+		status
+		)
+		values
+		<foreach collection="list" item="list" index="index" separator=",">
+			(
+			#{list.id},
+			#{list.bookName},
+			now(),
+			#{list.num},
+			#{list.bookInType},
+			#{list.price},
+			#{list.status}
+			)
+		</foreach>
+	</insert>
+
+	<!--图书列表分页查询-->
+	<select id="ListOfTs" resultType="com.example.ckglixt.responseDTO.ListOfCgTsResponseDTO">
+		select
+		id 				id,
+		book_name		bookName,
+		create_time		createTime,
+		num				num,
+		book_in_type	bookInType,
+		price			price,
+		status			status
+		from
+		cg_book
+		where
+		status = 2
+	</select>
+
+	<!--采购图书-->
+	<insert id="addCk" parameterType="java.util.List">
+		insert into book
+		(
+		book_id,
+		book_name,
+		create_time,
+		num,
+		book_in_type,
+		price
+		)
+		values
+		<foreach collection="list" item="list" index="index" separator=",">
+			(
+			#{list.id},
+			#{list.bookName},
+			now(),
+			#{list.num},
+			#{list.bookInType},
+			#{list.price}
+			)
+		</foreach>
+	</insert>
+
+	<!--采购入库操作->更新采购状态-->
+	<update id="updateStatus" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			update cg_book
+			set
+			status = 1
+			where
+			id = #{item}
+		</foreach>
+	</update>
+</mapper>

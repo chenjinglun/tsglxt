@@ -45,18 +45,17 @@ public class LoginController {
      * @return
      */
     @GetMapping("/out")
-    @ApiOperation(value="注销", notes="返回注销成功信息")
-    public ResponceData doLogOut(){
+    @ApiOperation(value="注销接口", notes="没有返回值")
+    public void doLogOut(){
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return ResponceData.success("注销成功");
     }
     /**
      * 设置登录
      * @param code
      * @return
      */
-    @PostMapping(value = "/autherror")
+    @GetMapping(value = "/autherror")
     @ApiOperation(value="设置未登录未授权跳转页", notes="无需使用")
     public String autherror(int code){
         return  code == 1?"未登录啦":"未授权哦";
