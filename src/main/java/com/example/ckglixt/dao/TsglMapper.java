@@ -4,7 +4,9 @@ package com.example.ckglixt.dao;
 import com.example.ckglixt.requestDTO.TsglAddEntity;
 import com.example.ckglixt.requestDTO.TsglAddRequestDTO;
 import com.example.ckglixt.requestDTO.TsglDeleteEntity;
+import com.example.ckglixt.requestDTO.UpdateTsRequestDTO;
 import com.example.ckglixt.responseDTO.ListOfCgTsResponseDTO;
+import com.example.ckglixt.responseDTO.ListOfCkTsResponseDTO;
 import com.example.ckglixt.responseDTO.addTsCkResponseDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,24 +21,18 @@ public interface TsglMapper {
      * @return
      */
     Integer addTs(List<TsglAddRequestDTO>list);
-//    /**
-//     * 根据编号或者名称判断图书是否存在
-//     * @param
-//     * @return
-//     */
-//    Integer findEixtTs(@Param("Name") String Name, @Param("No") String No);
-//    /**
-//     * 根据ID查找图书
-//     * @param
-//     * @return
-//     */
-//    Integer findTsByIdl(@Param("id") String id);
-//    /**
-//     * 删除图书
-//     * @param tsglDeleteEntity
-//     * @return
-//     */
-//    void deleteTs(TsglDeleteEntity tsglDeleteEntity);
+    /**
+     * 根据名称判断图书是否存在
+     * @param
+     * @return
+     */
+    Integer findBookByName(@Param("bookName") String bookName);
+    /**
+     * 删除图书
+     * @param tsglDeleteEntity
+     * @return
+     */
+    Integer deleteTs(TsglDeleteEntity tsglDeleteEntity);
     /**
      * 图书列表分页查询
      * @return
@@ -54,23 +50,22 @@ public interface TsglMapper {
      * @return
      */
     Integer updateStatus(List<String>list);
-//    /**
-//     * 根据名称是否重复
-//     * @param
-//     * @return
-//     */
-//    Integer judgeRepeat1(@Param("Name") String name, @Param("id") String id);
-//    /**
-//     * 根据编号是否重复
-//     * @param
-//     * @return
-//     */
-//    Integer judgeRepeat2(@Param("No") String No, @Param("id") String id);
-//    /**
-//     * 修改分类
-//     * @param tsglAddEntity
-//     * @return
-//     */
-//    void updateTs(TsglAddEntity tsglAddEntity);
+    /**
+     * 采购入库操作->更新数量
+     * @param Num,bookName
+     * @return
+     */
+    Integer updateNum(@Param("bookName") String bookName,@Param("Num") Integer Num);
+    /**
+     * 入库图书列表分页查询
+     * @return
+     */
+    List<ListOfCkTsResponseDTO> ListOfRkTs();
+    /**
+     * 修改图书
+     * @param updateTsRequestDTO
+     * @return
+     */
+    Integer updateTs(UpdateTsRequestDTO updateTsRequestDTO);
 
 }

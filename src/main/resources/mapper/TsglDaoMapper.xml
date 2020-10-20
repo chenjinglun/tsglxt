@@ -50,11 +50,11 @@
 <!--	</select>-->
 
 <!--    &lt;!&ndash;删除图书&ndash;&gt;-->
-<!--    <select id="deleteTs" parameterType="com.example.tushu.entity.TsglDeleteEntity">-->
+<!--    <select id="deleteTs" parameterType="com.example.ckglixt.requestDTO.TsglDeleteEntity">-->
 <!--	    delete from-->
 <!--	    book-->
 <!--	    where-->
-<!--	    id = #{id}-->
+<!--	    book_id = #{id}-->
 <!--	</select>-->
 
 <!--    <select id="ListOfTs" resultType="com.example.tushu.entity.TsglAddEntity">-->
@@ -162,7 +162,8 @@
 		book_name,
 		create_time,
 		num,
-		book_in_type,
+		isbn,
+		<!--book_in_type,-->
 		price
 		)
 		values
@@ -172,7 +173,8 @@
 			#{list.bookName},
 			now(),
 			#{list.num},
-			#{list.bookInType},
+			#{list.isBn},
+			<!--#{list.bookInType},-->
 			#{list.price}
 			)
 		</foreach>
@@ -187,5 +189,65 @@
 			where
 			id = #{item}
 		</foreach>
+	</update>
+
+	<!--删除图书-->
+	<delete id="deleteTs" parameterType="com.example.ckglixt.requestDTO.TsglDeleteEntity">
+	    delete from
+	    book
+	    where
+	    book_id = #{id}
+	</delete>
+
+	<!--根据名称判断图书是否存在-->
+	<select id="findBookByName" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT
+		count(*)
+		FROM
+		book
+		where
+		book_name = #{bookName}
+	</select>
+
+	<!--采购入库操作->更新数量-->
+	<update id="updateNum">
+			update book
+			set
+			num = num + #{Num},
+			update_time = now()
+			where
+			book_name = #{bookName}
+	</update>
+
+	<!--入库图书列表分页查询-->
+	<select id="ListOfRkTs" resultType="com.example.ckglixt.responseDTO.ListOfCkTsResponseDTO">
+		select
+		book_id 				id,
+		book_author     bookAuthor,
+		book_name		bookName,
+		book_press		bookPress,
+		isbn			isBn,
+		num				Num,
+		price			price,
+		book_place		bookPlace,
+		detail 			detail
+		from
+		book
+	</select>
+
+	<!--修改图书-->
+	<update id="updateTs" parameterType="com.example.ckglixt.requestDTO.UpdateTsRequestDTO">
+		update
+		 book
+		set
+		 book_author   = #{bookAuthor},
+		 book_press    = #{bookPress},
+		 price 		   = #{price},
+		 num           = #{Num},
+		 book_place    = #{bookPlace},
+		 detail        = #{detail},
+		 update_time   = now()
+		where
+		book_id = #{id}
 	</update>
 </mapper>

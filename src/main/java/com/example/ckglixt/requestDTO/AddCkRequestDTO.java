@@ -28,11 +28,11 @@ public class AddCkRequestDTO {
      */
     @ApiModelProperty(value = "采购数量")
     private String num;
-    /**
-     * 采购类型
-     */
-    @ApiModelProperty(value = "采购类型,1:购买，2：捐赠，3：回收")
-    private String bookInType;
+//    /**
+//     * 采购类型
+//     */
+//    @ApiModelProperty(value = "采购类型,1:购买，2：捐赠，3：回收")
+//    private String bookInType;
     /**
      * 价格
      */

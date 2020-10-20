@@ -29,10 +29,10 @@ public class addTsCkResponseDTO {
     @ApiModelProperty(value = "采购数量")
     private Integer num;
     /**
-     * 采购类型
+     * 书籍序列号
      */
-    @ApiModelProperty(value = "采购类型,1:购买，2：捐赠，3：回收")
-    private String bookInType;
+    @ApiModelProperty(value = "书籍序列号")
+    private String isBn;
     /**
      * 价格
      */
