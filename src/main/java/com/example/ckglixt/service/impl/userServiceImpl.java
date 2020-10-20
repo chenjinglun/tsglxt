@@ -161,4 +161,16 @@ public class userServiceImpl implements userService {
             return ResponceData.bizError("查询用户分页列表失败");
         }
     }
+
+    @Override
+    public ResponceData findRoleById(String name) {
+        if (name == null ){
+            return ResponceData.bizError("参数传递错误或者丢失！");
+        }
+        String role = userMapper.findRoleById(name);
+        if (role != null ){
+            return ResponceData.success(role);
+        }
+        return ResponceData.bizError("角色查询失败");
+    }
 }

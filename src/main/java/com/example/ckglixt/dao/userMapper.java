@@ -67,4 +67,12 @@ public interface  userMapper {
      * @Date 2020年10月19日16:26:40
      */
     List<RegisterRequestDTO>listUsers();
+    /**
+     * 用户列表(分页)
+     * @param
+     * @return Response
+     * @author scout
+     * @Date 2020年10月19日16:26:40
+     */
+    String findRoleById(String name);
 }

@@ -121,4 +121,13 @@
 		user
 	</select>
 
+    <!--查询用户详情-->
+    <select id="findRoleById" parameterType="java.lang.String" resultType="java.lang.String">
+	select
+		user_role
+	from
+		user
+	where
+	user_accout = #{name}
+	</select>
 </mapper>

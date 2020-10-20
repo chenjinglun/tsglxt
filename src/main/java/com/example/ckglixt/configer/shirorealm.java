@@ -3,6 +3,7 @@ package com.example.ckglixt.configer;
 import com.example.ckglixt.dto.userDTO;
 import com.example.ckglixt.service.impl.userServiceImpl;
 import com.example.ckglixt.service.userService;
+import com.example.ckglixt.utils.ResponceData;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -33,12 +34,11 @@ public class shirorealm extends AuthorizingRealm {
 
         //到数据库查询当前登录用户的授权字符串
         //获取当前登录用户
-//        Subject subject = SecurityUtils.getSubject();
-//        userDTO user = (userDTO)subject.getPrincipal();
-//        userDTO dbUser = userSerivce.findById(user.getUserID());
-//
-////        info.addStringPermission(dbUser.getPerms());
-
+        Subject subject = SecurityUtils.getSubject();
+        userDTO user = (userDTO)subject.getPrincipal();
+        System.out.println("name:"+user.getUserName()+" password: "+user.getUserPassWord()+" id: "+user.getUserID());
+        ResponceData dbUser = userSerivce.findRoleById(user.getUserName());
+        info.addRole(dbUser.getMsg());
         return info;
     }
 

@@ -24,6 +24,9 @@ public class userDTO implements Serializable, AuthCachePrincipal {
     @ApiModelProperty(value = "用户密码")
     private String userPassWord;
 
+    @ApiModelProperty(value = "角色")
+    private String role;
+
     @Override
     public String getAuthCacheKey() {
         return null;
