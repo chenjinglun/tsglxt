@@ -72,8 +72,9 @@ public class TsglService {
         if(tsglDeleteEntity.getId() == null){
             return ResponceData.bizError("删除图书参数丢失！");
         }
+        List<String> listylYl = Arrays.asList(tsglDeleteEntity.getId().split(","));
         //按照开发删除时应该选择对应分类然后传入对应的id,暂时不校验乱输入的id
-        Integer cnt = tsglDao.deleteTs(tsglDeleteEntity);
+        Integer cnt = tsglDao.deleteTs(listylYl);
         if (cnt == 0){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return ResponceData.bizError("图书出库失败！");

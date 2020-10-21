@@ -29,10 +29,10 @@ public interface  userMapper {
     Integer insert(RegisterRequestDTO registerRequestDTO);
     /**
      * 删除用户
-     * @param  id
+     * @param  listylYl
      * @return
      */
-    int deleteUser(@Param("id") String id);
+    int deleteUser(List<String>listylYl);
     /**
      * 新增用户
      * @param registerRequestDTO

@@ -28,10 +28,10 @@ public interface userService {
     public ResponceData saveUser(RegisterRequestDTO registerRequestDTO);
     /**
      * 删除用户
-     * @param  id
+     * @param  user_id
      * @return
      */
-    public ResponceData deleteUser(String id);
+    public ResponceData deleteUser(String user_id);
     /**
      * 修改用户
      *

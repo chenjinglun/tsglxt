@@ -29,10 +29,10 @@ public interface TsglMapper {
     Integer findBookByName(@Param("bookName") String bookName);
     /**
      * 删除图书
-     * @param tsglDeleteEntity
+     * @param id
      * @return
      */
-    Integer deleteTs(TsglDeleteEntity tsglDeleteEntity);
+    Integer deleteTs(List<String>id);
     /**
      * 图书列表分页查询
      * @return
