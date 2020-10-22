@@ -24,8 +24,33 @@ public class userDTO implements Serializable, AuthCachePrincipal {
     @ApiModelProperty(value = "用户密码")
     private String userPassWord;
 
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPassWord() {
+        return userPassWord;
+    }
+
+    public void setUserPassWord(String userPassWord) {
+        this.userPassWord = userPassWord;
+    }
+
     @Override
     public String getAuthCacheKey() {
         return null;
     }
+
 }

@@ -23,7 +23,8 @@
         user_name,
         user_sex ,
         user_phone,
-        user_role
+        user_role,
+        user_borrow_cnt
          )
         values
            (
@@ -33,7 +34,8 @@
            #{userName},
            #{userSex},
            #{userPhone},
-           #{role}
+           #{role},
+           0
             )
 	</insert>
 

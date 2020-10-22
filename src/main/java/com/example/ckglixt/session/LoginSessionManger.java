@@ -19,6 +19,7 @@ public class LoginSessionManger extends DefaultWebSessionManager {
      *
      * 指定sessionId的获取方式
      */
+    @Override
     protected Serializable getSessionId(ServletRequest request, ServletResponse response){
         //获取 请求头Authorization中的数据
         String id = WebUtils.toHttp(request).getHeader("Authorization");

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.ckglixt.dao.borrowMapper">
+<!--    查询用户借阅数量-->
+    <select id="getUserBorrowCnt" parameterType="java.lang.String" resultType="int">
+        select count(book_man)
+        from borrow
+        where `status` = 0
+        and book_man = #{userId}
+    </select>
+<!--    新增用户信息-->
+    <insert id="borrowBook" parameterType="java.lang.String">
+        insert into borrow
+        (
+            borrow_id,
+            book_code,
+            book_man,
+            book_cnt,
+            begin_time,
+            over_time,
+            `status`,
+            create_user,
+            create_time,
+            is_delete,
+            version
+        )
+        values
+        <foreach collection="list" index="index" separator="," item="item" >
+            (
+                #{item.borrowId},
+                #{item.isbn},
+                #{userId},
+                #{item.bookCnt},
+                now(),
+                DATE_ADD(NOW(),INTERVAL  + 1 MONTH),
+                0,
+                #{userId},
+                now(),
+                0,
+                0
+            )
+
+        </foreach>
+</insert>
+<!--    修改用户借书数量-->
+    <update id="updateUserCnt" parameterType="java.lang.String">
+        update `user`
+        set
+            user_borrow_cnt     = #{cnt},
+            update_user         = #{userId},
+            update_time         = now()
+        where user_id = #{userId}
+    </update>
+<!--    归还图书-->
+    <update id="returnBook" parameterType="java.lang.String">
+        update borrow
+        set
+            `status`        = 1,
+            update_user     = #{userId},
+            update_time     = now()
+        where borrow_id in
+        <foreach collection="listReturn" item="item" separator="," index="index" open="(" close=")">
+            #{item}
+        </foreach>
+    </update>
+<!--    查询借阅详情-->
+    <select id="getBorrowDetail" parameterType="java.lang.String" resultType="com.example.ckglixt.requestDTO.BorrowDTO">
+        SELECT
+			t1.borrowId,
+			t1.isbn,
+			t1.startTime,
+			t1.endTime,
+			t1.userId,
+			t2.user_name	'userName',
+			t2.user_phone	'userPhone',
+			t1.bookAuthor,
+			t1.bookName,
+			t1.bookPlace
+        from
+            (select
+	            s1.borrow_id			'borrowId',
+	            s1.book_code			'isbn',
+	            s1.book_man			    'userId',
+	            s2.book_author          'bookAuthor',
+	            s2.book_name            'bookName',
+	            s2.book_place           'bookPlace',
+	            s1.begin_time           'startTime',
+	            s1.over_time			'endTime'
+            from borrow s1
+            INNER JOIN book s2
+            on s1.book_code = s2.isbn
+            where s1.status = 0) t1
+        inner JOIN user t2
+        on t1.userId = t2.user_id
+        Where t1.borrowId = #{borrowId}
+
+    </select>
+
+<!--列表查询借阅信息-->
+    <select id="listBorrow" parameterType="com.example.ckglixt.requestDTO.BorrowDTO" resultType="com.example.ckglixt.requestDTO.BorrowDTO">
+        SELECT
+			t1.borrowId,
+			t1.isbn,
+			t1.startTime,
+			t1.endTime,
+			t1.userId,
+			t2.user_name	'userName',
+			t2.user_phone	'userPhone',
+			t1.bookAuthor,
+			t1.bookName
+        from
+            (select
+	            s1.borrow_id			'borrowId',
+	            s1.book_code			'isbn',
+	            s1.book_man			    'userId',
+	            s2.book_author          'bookAuthor',
+	            s2.book_name            'bookName',
+	            s2.book_place           'bookPlace',
+	            s1.begin_time           'startTime',
+	            s1.over_time			'endTime'
+            from borrow s1
+            INNER JOIN book s2
+            on s1.book_code = s2.isbn
+            where s1.status = 0) t1
+        inner JOIN user t2
+        on t1.userId = t2.user_id
+        <if test="userName != null and userName != '' " >
+            where t2.user_name like concat('%',#{userName},'%')
+        </if>
+    </select>
+
+
+
+
+
+
+</mapper>
