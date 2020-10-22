@@ -120,7 +120,7 @@ public class LoginController {
      * 注册（也做的，但是用不上）
      */
     @PostMapping(value = "/register")
-    @ApiOperation(value="账号登陆", notes="没有返回值")
+    @ApiOperation(value="注册", notes="没有返回值")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "id", value = "用户id", required = false, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "userAccout", value = "用户账号", required = true, dataType = "String"),

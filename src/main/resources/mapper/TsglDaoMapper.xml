@@ -193,10 +193,13 @@
 
 	<!--删除图书-->
 	<delete id="deleteTs" parameterType="com.example.ckglixt.requestDTO.TsglDeleteEntity">
-	    delete from
-	    book
-	    where
-	    book_id = #{id}
+		delete from
+		book
+		where
+		book_id in
+		<foreach collection="list" item="id" index="index" open="(" separator="," close=")">
+			(#{id})
+		</foreach>
 	</delete>
 
 	<!--根据名称判断图书是否存在-->

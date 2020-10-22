@@ -29,10 +29,10 @@ public interface  userMapper {
     Integer insert(RegisterRequestDTO registerRequestDTO);
     /**
      * 删除用户
-     * @param  id
+     * @param  listylYl
      * @return
      */
-    int deleteUser(@Param("id") String id);
+    int deleteUser(List<String>listylYl);
     /**
      * 新增用户
      * @param registerRequestDTO
@@ -67,4 +67,12 @@ public interface  userMapper {
      * @Date 2020年10月19日16:26:40
      */
     List<RegisterRequestDTO>listUsers();
+    /**
+     * 用户列表(分页)
+     * @param
+     * @return Response
+     * @author scout
+     * @Date 2020年10月19日16:26:40
+     */
+    String findRoleById(String name);
 }

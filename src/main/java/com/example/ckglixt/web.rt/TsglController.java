@@ -48,7 +48,7 @@ public class TsglController {
     @PostMapping("/deleteTsFromCk")
     @ApiOperation(value="图书出库", notes="无返回")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType="query", name = "id", value = "id", required = true, dataType = "String")
+            @ApiImplicitParam(paramType="query", name = "id", value = "用逗号一一对应分开id", required = true, dataType = "String")
     })
     public ResponceData deleteTsFromCk(TsglDeleteEntity tsglDeleteEntity){
         try {

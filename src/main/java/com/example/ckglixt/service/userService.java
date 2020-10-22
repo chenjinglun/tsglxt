@@ -29,10 +29,10 @@ public interface userService {
     public ResponceData saveUser(RegisterRequestDTO registerRequestDTO);
     /**
      * 删除用户
-     * @param  id
+     * @param  user_id
      * @return
      */
-    public ResponceData deleteUser(String id);
+    public ResponceData deleteUser(String user_id);
     /**
      * 修改用户
      *
@@ -60,4 +60,10 @@ public interface userService {
      * @Date 2020年10月19日16:26:40
      */
     public ResponceData listUsers(ListUsersRequestDTO listUsersRequestDTO);
+    /**
+     * 根据名称查找角色
+     * @param name
+     * @return
+     */
+    public ResponceData findRoleById (String name);
 }

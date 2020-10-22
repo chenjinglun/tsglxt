@@ -10,8 +10,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,16 +63,22 @@ public class userServiceImpl implements userService {
     }
     /**
      * 删除用户
-     * @param  id
+     * @param  user_id
      * @return
      */
     @Override
-    public ResponceData deleteUser(String id) {
-        Integer cnt = userMapper.deleteUser(id);
-        if (cnt == null){
-            return ResponceData.bizError("刪除失敗!");
+    @Transactional(rollbackFor = Exception.class)
+    public ResponceData deleteUser(String user_id) {
+        if (user_id == null){
+            return ResponceData.bizError("参数丢失");
         }
-        return ResponceData.success("刪除成功!");
+        List<String> listylYl = Arrays.asList(user_id.split(","));
+        Integer cnt = userMapper.deleteUser(listylYl);
+        if (cnt == null){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ResponceData.bizError("用户刪除失敗!");
+        }
+        return ResponceData.success("用户刪除成功!");
     }
     /**
      * 新增用户
@@ -160,5 +169,17 @@ public class userServiceImpl implements userService {
         } else {
             return ResponceData.bizError("查询用户分页列表失败");
         }
+    }
+
+    @Override
+    public ResponceData findRoleById(String name) {
+        if (name == null ){
+            return ResponceData.bizError("参数传递错误或者丢失！");
+        }
+        String role = userMapper.findRoleById(name);
+        if (role != null ){
+            return ResponceData.success(role);
+        }
+        return ResponceData.bizError("角色查询失败");
     }
 }

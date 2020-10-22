@@ -92,7 +92,7 @@ public class Usercontroller {
       @PostMapping("deleteUser")
       @ApiOperation(value="删除用户", notes="没返回值，删除用户")
       @ApiImplicitParams({
-              @ApiImplicitParam(paramType="query", name = "user_id", value = "用户id", required = true, dataType = "String")
+              @ApiImplicitParam(paramType="query", name = "user_id", value = "多个用户逗号分开", required = true, dataType = "String")
       })
     public ResponceData deleteUser(String user_id){
           try{
