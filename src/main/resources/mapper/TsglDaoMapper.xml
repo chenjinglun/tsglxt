@@ -246,7 +246,7 @@
 		 book_author   = #{bookAuthor},
 		 book_press    = #{bookPress},
 		 price 		   = #{price},
-		 num           = #{Num},
+		 num           = #{num},
 		 book_place    = #{bookPlace},
 		 detail        = #{detail},
 		 update_time   = now()

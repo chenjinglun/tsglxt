@@ -36,7 +36,7 @@ public class UpdateTsRequestDTO {
      * 数量
      */
     @ApiModelProperty(value = "数量")
-    private Integer Num;
+    private Integer num;
     /**
      * 书本存放地方
      */

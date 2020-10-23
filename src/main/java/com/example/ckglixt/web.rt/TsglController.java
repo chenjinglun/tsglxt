@@ -127,7 +127,7 @@ public class TsglController {
             @ApiImplicitParam(paramType="query", name = "bookAuthor", value = "作者", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "price", value = "价格", required = true, dataType = "float"),
             @ApiImplicitParam(paramType="query", name = "bookPress", value = "出版社", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "Num", value = "数量", required = true, dataType = "int"),
+            @ApiImplicitParam(paramType="query", name = "num", value = "数量", required = true, dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "detail", value = "书籍介绍", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "bookPlace", value = "书本存放地方", required = true, dataType = "String")
     })
