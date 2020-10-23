@@ -223,7 +223,7 @@
 	</update>
 
 	<!--入库图书列表分页查询-->
-	<select id="ListOfRkTs" resultType="com.example.ckglixt.responseDTO.ListOfCkTsResponseDTO">
+	<select id="ListOfRkTs" parameterType="com.example.ckglixt.requestDTO.ListUsersRequestDTO" resultType="com.example.ckglixt.responseDTO.ListOfCkTsResponseDTO">
 		select
 		book_id 				id,
 		book_author     bookAuthor,
@@ -236,6 +236,17 @@
 		detail 			detail
 		from
 		book
+		where
+		book_id = book_id
+		<if test="bookName != null and bookName != ''">
+			and book_name like concat('%', #{bookName}, '%')
+		</if>
+		<if test="bookPress != null and bookPress != ''">
+			and book_press like concat('%', #{bookPress}, '%')
+		</if>
+		<if test="bookAuthor != null and bookAuthor != ''">
+			and book_author like concat('%', #{bookAuthor}, '%')
+		</if>
 	</select>
 
 	<!--修改图书-->

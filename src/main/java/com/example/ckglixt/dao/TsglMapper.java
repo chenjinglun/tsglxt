@@ -1,10 +1,7 @@
 package com.example.ckglixt.dao;
 
 
-import com.example.ckglixt.requestDTO.TsglAddEntity;
-import com.example.ckglixt.requestDTO.TsglAddRequestDTO;
-import com.example.ckglixt.requestDTO.TsglDeleteEntity;
-import com.example.ckglixt.requestDTO.UpdateTsRequestDTO;
+import com.example.ckglixt.requestDTO.*;
 import com.example.ckglixt.responseDTO.ListOfCgTsResponseDTO;
 import com.example.ckglixt.responseDTO.ListOfCkTsResponseDTO;
 import com.example.ckglixt.responseDTO.addTsCkResponseDTO;
@@ -60,7 +57,7 @@ public interface TsglMapper {
      * 入库图书列表分页查询
      * @return
      */
-    List<ListOfCkTsResponseDTO> ListOfRkTs();
+    List<ListOfCkTsResponseDTO> ListOfRkTs(ListUsersRequestDTO listUsersRequestDTO);
     /**
      * 修改图书
      * @param updateTsRequestDTO

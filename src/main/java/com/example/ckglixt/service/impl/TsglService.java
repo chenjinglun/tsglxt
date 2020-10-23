@@ -169,7 +169,7 @@ public class TsglService {
         }
         PageHelper.clearPage();
         PageHelper.startPage(listUsersRequestDTO.getPageNum(), listUsersRequestDTO.getPageSize());
-        List<ListOfCkTsResponseDTO> ListTs = tsglDao.ListOfRkTs();
+        List<ListOfCkTsResponseDTO> ListTs = tsglDao.ListOfRkTs(listUsersRequestDTO);
         // 包装Page对象
         PageInfo<ListOfCkTsResponseDTO> pageData = new PageInfo<>(ListTs);
         if (ListTs.size() <=0 ){

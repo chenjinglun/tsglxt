@@ -21,20 +21,19 @@ public class ListUsersRequestDTO {
      */
     @ApiModelProperty(value = "页数")
     private int pageNum;
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
+    /**
+     * 书名
+     */
+    @ApiModelProperty(value = "书名")
+    private String bookName;
+    /**
+     * 出版社
+     */
+    @ApiModelProperty(value = "出版社")
+    private String bookPress;
+    /**
+     * 作者
+     */
+    @ApiModelProperty(value = "作者")
+    private String bookAuthor;
 }

@@ -104,6 +104,9 @@ public class TsglController {
     @PostMapping("/ListOfRkTs")
     @ApiOperation(value="分页查询入库图书", notes="返回入库图书分页列表")
     @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", name = "bookPress", value = "出版社(模糊查询)", required = false, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "bookName", value = "书名(模糊查询)", required = false, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "bookAuthor", value = "作者(模糊查询)", required = false, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "pageSize", value = "页码", required = true, dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "pageNum", value = "页数", required = true, dataType = "int")
     })
