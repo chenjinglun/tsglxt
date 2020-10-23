@@ -173,10 +173,10 @@ public class TsglService {
         // 包装Page对象
         PageInfo<ListOfCkTsResponseDTO> pageData = new PageInfo<>(ListTs);
         if (ListTs.size() <=0 ){
-            return ResponceData.bizError("未入库图书信息列表查询为空!");
+            return ResponceData.bizError("已入库图书信息列表查询为空!");
         }
         else {
-            return ResponceData.success("未入库图书信息列表查询成功",pageData);
+            return ResponceData.success("已入库图书信息列表查询成功",pageData);
         }
     }
     /**
