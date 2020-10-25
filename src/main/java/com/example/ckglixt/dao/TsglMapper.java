@@ -31,6 +31,12 @@ public interface TsglMapper {
      */
     Integer deleteTs(List<String>id);
     /**
+     * 采购图书单据删除
+     * @param id
+     * @return
+     */
+    Integer deleteTsFromCg(List<String>id);
+    /**
      * 图书列表分页查询
      * @return
      */

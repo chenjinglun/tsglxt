@@ -43,6 +43,24 @@ public class TsglController {
     }
 
     /**
+     * 采购图书单据删除
+     */
+    @PostMapping("/deleteTsFromCg")
+    @ApiOperation(value="采购图书单据删除", notes="无返回")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", name = "id", value = "用逗号一一对应分开id", required = true, dataType = "String")
+    })
+    public ResponceData deleteTsFromCg(TsglDeleteEntity tsglDeleteEntity){
+        try {
+            return tsglService.deleteTsFromCg(tsglDeleteEntity);
+        }catch (Exception e){
+            logger.error("采购图书单据删除失败",e);
+            System.out.println(e.toString());
+            throw e;
+        }
+    }
+
+    /**
      * 图书出库
      */
     @PostMapping("/deleteTsFromCk")

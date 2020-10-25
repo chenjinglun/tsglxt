@@ -202,6 +202,17 @@
 		</foreach>
 	</delete>
 
+	<!--采购图书单据删除-->
+	<delete id="deleteTsFromCg" parameterType="com.example.ckglixt.requestDTO.TsglDeleteEntity">
+		delete from
+		cg_book
+		where
+		id in
+		<foreach collection="list" item="id" index="index" open="(" separator="," close=")">
+			(#{id})
+		</foreach>
+	</delete>
+
 	<!--根据名称判断图书是否存在-->
 	<select id="findBookByName" parameterType="java.lang.String" resultType="java.lang.Integer">
 		SELECT

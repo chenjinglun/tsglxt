@@ -1,5 +1,6 @@
 package com.example.ckglixt.web.rt;
 
+import com.example.ckglixt.dto.BackFrontDataDTO;
 import com.example.ckglixt.dto.userDTO;
 import com.example.ckglixt.requestDTO.RegisterRequestDTO;
 import com.example.ckglixt.service.userService;
@@ -71,6 +72,7 @@ public class LoginController {
             @ApiImplicitParam(paramType="query", name = "code", value = "验证码", required = true, dataType = "String")
     })
     public ResponceData login(String name, String password,String code){
+        BackFrontDataDTO backFrontDataDTO = new BackFrontDataDTO();
         String codes = (String) session.getAttribute("verCode");
         if (codes == null){
             codes = "1";
@@ -93,6 +95,8 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
 //        //1.1获取session
         String sid = (String)subject.getSession().getId();
+        //封装用户信息返回前端
+        backFrontDataDTO.setAuthorization(sid);
         //2.封装用户数据
         UsernamePasswordToken token = new UsernamePasswordToken(name,password);
         //3.执行登录方法
@@ -101,7 +105,13 @@ public class LoginController {
                 //登录成功
                 //跳转到test.html
                 subject.login(token);
-                return ResponceData.success("登录成功",sid);
+                //封装用户信息返回前端
+                userDTO user = (userDTO)subject.getPrincipal();
+                backFrontDataDTO.setUserName(user.getUserName());
+                backFrontDataDTO.setUserRole(userSerivce.findRoleById(user.getUserName()).getMsg());
+                session.setAttribute("UserName",user.getUserName());
+                session.setAttribute("UserRole",userSerivce.findRoleById(user.getUserName()).getMsg());
+                return ResponceData.success("登录成功",backFrontDataDTO);
             }
             else {
                 return ResponceData.bizError("验证码错误");

@@ -81,6 +81,26 @@ public class TsglService {
         }
         return ResponceData.success("图书出库成功!");
     }
+
+    /**
+     * 采购图书单据删除
+     * @param tsglDeleteEntity
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public ResponceData deleteTsFromCg(TsglDeleteEntity tsglDeleteEntity) {
+        if(tsglDeleteEntity.getId() == null){
+            return ResponceData.bizError("参数丢失！");
+        }
+        List<String> listCgTs = Arrays.asList(tsglDeleteEntity.getId().split(","));
+        //按照开发删除时应该选择对应分类然后传入对应的id,暂时不校验乱输入的id
+        Integer cnt = tsglDao.deleteTsFromCg(listCgTs);
+        if (cnt == 0){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return ResponceData.bizError("采购图书单据删除失败！");
+        }
+        return ResponceData.success("采购图书单据删除成功!");
+    }
     /**
      * 查询未入库图书
      * @param
