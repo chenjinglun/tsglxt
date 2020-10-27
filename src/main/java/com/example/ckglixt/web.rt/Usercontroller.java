@@ -40,7 +40,7 @@ public class Usercontroller {
             @ApiImplicitParam(paramType="query", name = "userName", value = "用户名名称", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "userSex", value = "用户性别：0男1女", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "userPhone", value = "手机号", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "role", value = "0为超级管理员，1为管理员，2为客户", required = true, dataType = "String")
+            @ApiImplicitParam(paramType="query", name = "role", value = "1为管理员，2为客户", required = true, dataType = "String")
     })
     public ResponceData saveUser(RegisterRequestDTO registerRequestDTO){
         try{
@@ -70,7 +70,7 @@ public class Usercontroller {
             @ApiImplicitParam(paramType="query", name = "userName", value = "用户名名称", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "userSex", value = "用户性别：0男1女", required = true, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "userPhone", value = "手机号", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "role", value = "有缺陷后期做,角色修改问题，为超级管理员，1为管理员，2为客户", required = false, dataType = "String")
+            @ApiImplicitParam(paramType="query", name = "role", value = "1为管理员，2为客户", required = true, dataType = "String")
     })
     public ResponceData updateUser(RegisterRequestDTO registerRequestDTO){
             try{
@@ -137,6 +137,9 @@ public class Usercontroller {
     @PostMapping(value = "ListUsers")
     @ApiOperation(value="用户列表分页查询", notes="返回用户列表")
     @ApiImplicitParams({
+            @ApiImplicitParam(paramType="query", name = "bookPress", value = "账号(模糊查询)", required = false, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "bookName", value = "用户名(模糊查询)", required = false, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "bookAuthor", value = "角色(模糊查询)", required = false, dataType = "String"),
             @ApiImplicitParam(paramType="query", name = "pageSize", value = "页码", required = true, dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "pageNum", value = "页数", required = true, dataType = "int")
     })

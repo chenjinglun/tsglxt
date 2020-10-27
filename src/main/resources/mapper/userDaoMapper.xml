@@ -91,6 +91,7 @@
 	    user_password = #{userPassWord},
 	    user_name = #{userName},
 	    user_sex = #{userSex},
+	    user_role = #{role},
 	    user_phone = #{userPhone}
 	    where
 	    user_id = #{userID}
@@ -113,7 +114,7 @@
 	</select>
 
 	<!--查询用户详情-->
-	<select id="listUsers" resultType="com.example.ckglixt.requestDTO.RegisterRequestDTO">
+	<select id="listUsers" parameterType="com.example.ckglixt.requestDTO.ListUsersRequestDTO" resultType="com.example.ckglixt.requestDTO.RegisterRequestDTO">
 	select
 		user_id  		userID,
         user_accout 	userAccout,
@@ -124,6 +125,17 @@
         user_role		role
 	from
 		user
+		where
+		user_id = user_id
+		<if test="bookName != null and bookName != ''">
+			and user_name like concat('%', #{bookName}, '%')
+		</if>
+		<if test="bookPress != null and bookPress != ''">
+			and user_accout like concat('%', #{bookPress}, '%')
+		</if>
+		<if test="bookAuthor != null and bookAuthor != ''">
+			and user_role like concat('%', #{bookAuthor}, '%')
+		</if>
 	</select>
 
     <!--查询用户详情-->

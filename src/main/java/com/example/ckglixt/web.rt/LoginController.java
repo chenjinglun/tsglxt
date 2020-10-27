@@ -108,6 +108,7 @@ public class LoginController {
                 //封装用户信息返回前端
                 userDTO user = (userDTO)subject.getPrincipal();
                 backFrontDataDTO.setUserName(user.getUserName());
+                backFrontDataDTO.setUserId(user.getUserID());
                 backFrontDataDTO.setUserRole(userSerivce.findRoleById(user.getUserName()).getMsg());
                 session.setAttribute("UserName",user.getUserName());
                 session.setAttribute("UserRole",userSerivce.findRoleById(user.getUserName()).getMsg());

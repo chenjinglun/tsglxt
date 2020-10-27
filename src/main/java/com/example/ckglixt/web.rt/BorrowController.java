@@ -106,8 +106,8 @@ public class BorrowController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType="query", name = "pageSize", value = "页码", required = true, dataType = "int"),
             @ApiImplicitParam(paramType="query", name = "pageNum", value = "页数", required = true, dataType = "int"),
-            @ApiImplicitParam(paramType="query", name = "userId", value = "用户编号", required = true, dataType = "String"),
-            @ApiImplicitParam(paramType="query", name = "userName", value = "借阅人", required = true, dataType = "String")
+            @ApiImplicitParam(paramType="query", name = "userId", value = "用户编号", required = false, dataType = "String"),
+            @ApiImplicitParam(paramType="query", name = "userName", value = "借阅人", required = false, dataType = "String")
     })
     private ResponceData listBorrow(BorrowDTO borrowDTO){
         try{

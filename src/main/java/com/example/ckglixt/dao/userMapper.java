@@ -1,6 +1,7 @@
 package com.example.ckglixt.dao;
 
 import com.example.ckglixt.dto.userDTO;
+import com.example.ckglixt.requestDTO.ListUsersRequestDTO;
 import com.example.ckglixt.requestDTO.RegisterRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -66,7 +67,7 @@ public interface  userMapper {
      * @author scout
      * @Date 2020年10月19日16:26:40
      */
-    List<RegisterRequestDTO>listUsers();
+    List<RegisterRequestDTO>listUsers(ListUsersRequestDTO listUsersRequestDTO);
     /**
      * 用户列表(分页)
      * @param

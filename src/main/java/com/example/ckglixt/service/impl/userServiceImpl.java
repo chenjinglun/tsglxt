@@ -118,7 +118,7 @@ public class userServiceImpl implements userService {
     @Override
     public ResponceData updateUser(RegisterRequestDTO registerRequestDTO) {
         if (registerRequestDTO.getUserPassWord() == null ||registerRequestDTO.getUserSex() == null || registerRequestDTO.getUserPhone() == null
-                 ||registerRequestDTO.getUserID() == null){
+                 ||registerRequestDTO.getUserID() == null || registerRequestDTO.getRole() == null ){
             return ResponceData.bizError("所需参数不完整，请重新输入");
         }
         Md5Hash md5Hash2 = new Md5Hash(registerRequestDTO.getUserPassWord(),"xo*7ps",1024);
@@ -163,7 +163,7 @@ public class userServiceImpl implements userService {
         }
         PageHelper.clearPage();
         PageHelper.startPage(listUsersRequestDTO.getPageNum(), listUsersRequestDTO.getPageSize());
-        List<RegisterRequestDTO> lists = userMapper.listUsers();
+        List<RegisterRequestDTO> lists = userMapper.listUsers(listUsersRequestDTO);
         if (lists.size() != 0) {
             return ResponceData.success("查询用户分页列表成功！",new PageInfo<>(lists));
         } else {

@@ -19,4 +19,7 @@ public class BackFrontDataDTO {
 
     @ApiModelProperty(value = "token")
     private String Authorization;
+
+    @ApiModelProperty(value = "userId")
+    private String userId;
 }
