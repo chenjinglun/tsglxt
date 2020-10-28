@@ -4,7 +4,7 @@ import com.example.ckglixt.dto.userDTO;
 import com.example.ckglixt.requestDTO.ListUsersRequestDTO;
 import com.example.ckglixt.requestDTO.RegisterRequestDTO;
 import com.example.ckglixt.utils.ResponceData;
-
+import org.springframework.stereotype.Service;
 
 public interface userService {
     /**

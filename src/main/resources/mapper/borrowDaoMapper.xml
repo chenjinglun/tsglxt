@@ -3,10 +3,16 @@
 <mapper namespace="com.example.ckglixt.dao.borrowMapper">
 <!--    查询用户借阅数量-->
     <select id="getUserBorrowCnt" parameterType="java.lang.String" resultType="int">
-        select count(book_man)
+        select user_borrow_cnt
+        from user
+        where user_id = #{userId}
+    </select>
+<!--    从借阅信息表中查询借阅数量-->
+    <select id="getBorrowCnt" parameterType="java.lang.String" resultType="int">
+        select sum(book_cnt)
         from borrow
-        where `status` = 0
-        and book_man = #{userId}
+        where book_man = #{userId}
+        and `status` = 0
     </select>
 <!--    新增用户信息-->
     <insert id="borrowBook" parameterType="java.lang.String">
@@ -92,7 +98,11 @@
             where s1.status = 0) t1
         inner JOIN user t2
         on t1.userId = t2.user_id
-        Where t1.borrowId = #{borrowId}
+        Where t1.borrowId  in
+        <foreach collection="listBorrowId" item="item" separator="," index="index" close=")" open="(">
+             #{item}
+        </foreach>
+
 
     </select>
 
@@ -128,6 +138,38 @@
             where t2.user_name like concat('%',#{userName},'%')
         </if>
     </select>
+<!--    修改商品库存量（借阅图书）-->
+    <update id="updateBookCnt" parameterType="java.lang.String">
+        update book
+        <trim prefix="set">
+            <trim prefix="`num` = case" suffix="end">
+                <foreach collection="list1" item="item">
+                    when isbn = #{item.isbn} then `num`-#{item.bookCntInt}
+                </foreach>
+            </trim>
+        </trim>
+        <where>
+            <foreach collection="list1" separator="or" item="item4">
+                isbn = #{item4.isbn}
+            </foreach>
+        </where>
+    </update>
+    <!--    修改商品库存量（归还图书）-->
+    <update id="updateBookCntReturn" parameterType="java.lang.String">
+        update book
+        <trim prefix="set">
+            <trim prefix="`num` = case" suffix="end">
+                <foreach collection="list1" item="item">
+                    when isbn = #{item.isbn} then `num`+ #{item.bookCntInt}
+                </foreach>
+            </trim>
+        </trim>
+        <where>
+            <foreach collection="list1" separator="or" item="item4">
+                isbn = #{item4.isbn}
+            </foreach>
+        </where>
+    </update>
 
 
 

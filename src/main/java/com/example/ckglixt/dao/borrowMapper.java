@@ -17,6 +17,14 @@ public interface borrowMapper {
     */
     int getUserBorrowCnt(@Param("userId") String userId);
     /**
+     * @Description: 从借阅信息表中统计查询用户借阅数量
+     * @Param: userId
+     * @return:  int
+     * @Author: xukunyuan
+     * @Date: 2020/10/21
+     */
+    int getBorrowCnt(@Param("userId") String userId);
+    /**
     * @Description: 新增图书借阅信息
     * @Param:  userId，listIsbn,listCnt,listBorrowId
     * @return: int
@@ -47,7 +55,7 @@ public interface borrowMapper {
     * @Author: xukunyuan
     * @Date: 2020/10/22
     */
-    BorrowDTO getBorrowDetail(@Param("borrowId") String borrowId);
+    List<BorrowDTO> getBorrowDetail(@Param("listBorrowId") List<String> listBorrowId);
     /**
      * @Description: 列表查询借阅信息
      * @Param: borrowDTO
@@ -56,4 +64,20 @@ public interface borrowMapper {
      * @Date: 2020/10/22
      */
     List<BorrowDTO> listBorrow(@Param("borrowDTO") BorrowDTO borrowDTO,@Param("userName") String userName);
+    /**
+    * @Description: 修改书本库存量 （借阅图书）
+    * @Param:  listIsbn、listCntInt
+    * @return:  int
+    * @Author: xukunyuan
+    * @Date: 2020/10/27
+    */
+    int updateBookCnt(@Param("list1") List<BorrowDTO> list1);
+    /**
+     * @Description: 修改书本库存量 （归还图书）
+     * @Param:  listIsbn、listCntInt
+     * @return:  int
+     * @Author: xukunyuan
+     * @Date: 2020/10/27
+     */
+    int updateBookCntReturn(@Param("list1") List<BorrowDTO> list1);
 }

@@ -38,7 +38,6 @@ public class BorrowController {
     @PostMapping("borrowBook")
     @ApiOperation(value = "图书借阅",notes = "没有返回值")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query",name = "userId",value = "用户id", required =true,dataType = "String"),
             @ApiImplicitParam(paramType = "query",name = "isbn",value = "图书编号", required =true,dataType = "String"),
             @ApiImplicitParam(paramType = "query",name = "bookCnt",value = "借阅数量", required =true,dataType = "String")
     })
@@ -62,7 +61,8 @@ public class BorrowController {
     @ApiOperation(value = "图书归还",notes = "没有返回值")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query",name = "borrowId",value = "借阅编号", required =true,dataType = "String"),
-            @ApiImplicitParam(paramType = "query",name = "userId",value = "用户id", required =true,dataType = "String")
+            @ApiImplicitParam(paramType = "query",name = "bookCnt",value = "借阅数量", required =true,dataType = "String"),
+            @ApiImplicitParam(paramType = "query",name = "isbn",value = "图书编号", required =true,dataType = "String")
     })
     public ResponceData returnBook(BorrowDTO borrowDTO){
         try{

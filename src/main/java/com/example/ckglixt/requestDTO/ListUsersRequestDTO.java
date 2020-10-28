@@ -36,4 +36,44 @@ public class ListUsersRequestDTO {
      */
     @ApiModelProperty(value = "作者")
     private String bookAuthor;
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public String getBookPress() {
+        return bookPress;
+    }
+
+    public void setBookPress(String bookPress) {
+        this.bookPress = bookPress;
+    }
+
+    public String getBookAuthor() {
+        return bookAuthor;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
 }

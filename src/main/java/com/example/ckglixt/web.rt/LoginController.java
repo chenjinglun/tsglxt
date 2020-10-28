@@ -21,6 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,8 +39,8 @@ public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @Autowired
-    private userService userSerivce;
+    @Resource
+    private com.example.ckglixt.service.userService userService;
     @Autowired
     private HttpSession session;
     /**
@@ -108,10 +110,9 @@ public class LoginController {
                 //封装用户信息返回前端
                 userDTO user = (userDTO)subject.getPrincipal();
                 backFrontDataDTO.setUserName(user.getUserName());
-                backFrontDataDTO.setUserId(user.getUserID());
-                backFrontDataDTO.setUserRole(userSerivce.findRoleById(user.getUserName()).getMsg());
+                backFrontDataDTO.setUserRole(userService.findRoleById(user.getUserName()).getMsg());
                 session.setAttribute("UserName",user.getUserName());
-                session.setAttribute("UserRole",userSerivce.findRoleById(user.getUserName()).getMsg());
+                session.setAttribute("UserRole",userService.findRoleById(user.getUserName()).getMsg());
                 return ResponceData.success("登录成功",backFrontDataDTO);
             }
             else {
@@ -144,7 +145,7 @@ public class LoginController {
     public ResponceData register(RegisterRequestDTO registerRequestDTO){
         //3.执行保存方法
         try {
-            return userSerivce.insert(registerRequestDTO);
+            return userService.insert(registerRequestDTO);
         }catch (Exception e){
             e.printStackTrace();
             return ResponceData.bizError("注册失败");

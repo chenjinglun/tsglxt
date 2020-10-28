@@ -35,12 +35,12 @@ public class BorrowDTO {
      * 借阅时间
      */
     @ApiModelProperty(value = "借阅时间")
-    private Date startTime;
+    private String startTime;
     /**
      * 归还时间
      */
     @ApiModelProperty(value = "归还时间")
-    private Date endTime;
+    private String endTime;
     /**
      * 借阅id
      */
@@ -56,6 +56,12 @@ public class BorrowDTO {
      */
     @ApiModelProperty(value = "借阅数量")
     private String bookCnt;
+    /**
+     * 借阅数量(int)
+     */
+    @ApiModelProperty(value = "借阅数量")
+    private Integer bookCntInt;
+
     /**
      * 借阅状态：0为未归还,1为已归还
      */
@@ -116,6 +122,14 @@ public class BorrowDTO {
         this.bookPlace = bookPlace;
     }
 
+    public Integer getBookCntInt() {
+        return bookCntInt;
+    }
+
+    public void setBookCntInt(Integer bookCntInt) {
+        this.bookCntInt = bookCntInt;
+    }
+
     public int getPageSize() {
         return pageSize;
     }
@@ -140,19 +154,19 @@ public class BorrowDTO {
         this.userId = userId;
     }
 
-    public Date getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

@@ -20,6 +20,27 @@ public class BackFrontDataDTO {
     @ApiModelProperty(value = "token")
     private String Authorization;
 
-    @ApiModelProperty(value = "userId")
-    private String userId;
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getAuthorization() {
+        return Authorization;
+    }
+
+    public void setAuthorization(String authorization) {
+        Authorization = authorization;
+    }
 }
