@@ -9,6 +9,7 @@ import com.example.ckglixt.responseDTO.addTsCkResponseDTO;
 import com.example.ckglixt.utils.ResponceData;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -188,7 +189,7 @@ public class TsglService {
         if (listUsersRequestDTO == null || listUsersRequestDTO.getPageNum() <= 0 || listUsersRequestDTO.getPageSize() <=0){
             return ResponceData.bizError("参数丢失");
         }
-
+        userDTO user = (userDTO) SecurityUtils.getSubject().getPrincipal();
         PageHelper.clearPage();
         PageHelper.startPage(listUsersRequestDTO.getPageNum(), listUsersRequestDTO.getPageSize());
         List<ListOfCkTsResponseDTO> ListTs = tsglDao.ListOfRkTs(listUsersRequestDTO);

@@ -8,7 +8,7 @@
         where user_id = #{userId}
     </select>
 <!--    从借阅信息表中查询借阅数量-->
-    <select id="getBorrowCnt" parameterType="java.lang.String" resultType="int">
+    <select id="getBorrowCnt" parameterType="java.lang.String" resultType="java.lang.Integer">
         select sum(book_cnt)
         from borrow
         where book_man = #{userId}

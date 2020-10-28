@@ -148,7 +148,7 @@ public class BorrowServicelmpl implements borrowService {
          * 修改用户借书数量信息
          */
         //查询借书信息表中该用户借书数量
-        int sum1 = borrowMapper.getBorrowCnt(borrowDTO.getUserId());
+        Integer sum1 = borrowMapper.getBorrowCnt(borrowDTO.getUserId());
         //将sum1的int类型转换成String类型
         String sum2 = String.valueOf(sum1);
         System.out.println(borrowDTO.getUserId());
@@ -192,8 +192,11 @@ public class BorrowServicelmpl implements borrowService {
             return ResponceData.bizError("归还失败，请重试");
         }
         //查询借书信息表中该用户借书数量
-        int sum1 = borrowMapper.getBorrowCnt(borrowDTO.getUserId());
+        Integer sum1 = borrowMapper.getBorrowCnt(borrowDTO.getUserId());
         //将sum1的int类型转换成String类型
+        if (sum1 == null){
+            sum1 = 0;
+        }
         String sum2 = String.valueOf(sum1);
         System.out.println(borrowDTO.getUserId());
         if (borrowMapper.updateUserCnt(borrowDTO.getUserId(),sum2) == 0){

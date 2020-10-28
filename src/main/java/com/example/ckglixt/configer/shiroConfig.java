@@ -52,7 +52,7 @@ public class shiroConfig {
 //        filterMap.put("/update", "perms[user:update]");
 //        filterMap.put("/*", "authc");
         filterMap.put("/Api/autherror", "anon");
-//        filterMap.put("/Api/ListUsers", "roles[0]");
+//        filterMap.put("/Api/**", "roles[1]");
         filterMap.put("/Api/getImage", "anon");
         filterMap.put("/Api/register", "anon");
         filterMap.put("/Api/out", "authc");

@@ -23,7 +23,7 @@ public interface borrowMapper {
      * @Author: xukunyuan
      * @Date: 2020/10/21
      */
-    int getBorrowCnt(@Param("userId") String userId);
+    Integer getBorrowCnt(@Param("userId") String userId);
     /**
     * @Description: 新增图书借阅信息
     * @Param:  userId，listIsbn,listCnt,listBorrowId
