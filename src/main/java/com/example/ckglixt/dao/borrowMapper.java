@@ -63,7 +63,7 @@ public interface borrowMapper {
      * @Author: xukunyuan
      * @Date: 2020/10/22
      */
-    List<BorrowDTO> listBorrow(@Param("borrowDTO") BorrowDTO borrowDTO,@Param("userName") String userName);
+    List<BorrowDTO> listBorrow(@Param("borrowDTO") BorrowDTO borrowDTO,@Param("userName") String userName,@Param("bookAuthor") String bookAuthor,@Param("bookName") String bookName);
     /**
     * @Description: 修改书本库存量 （借阅图书）
     * @Param:  listIsbn、listCntInt

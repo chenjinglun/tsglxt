@@ -117,7 +117,8 @@
 			t2.user_name	'userName',
 			t2.user_phone	'userPhone',
 			t1.bookAuthor,
-			t1.bookName
+			t1.bookName,
+			t1.bookCnt
         from
             (select
 	            s1.borrow_id			'borrowId',
@@ -127,15 +128,24 @@
 	            s2.book_name            'bookName',
 	            s2.book_place           'bookPlace',
 	            s1.begin_time           'startTime',
-	            s1.over_time			'endTime'
+	            s1.over_time			'endTime',
+	            s1.book_cnt             'bookCnt',
+	            s1.is_delete
             from borrow s1
             INNER JOIN book s2
             on s1.book_code = s2.isbn
             where s1.status = 0) t1
         inner JOIN user t2
         on t1.userId = t2.user_id
+        where t1.is_delete = 0
         <if test="userName != null and userName != '' " >
-            where t2.user_name like concat('%',#{userName},'%')
+            and t2.user_name like concat('%',#{userName},'%')
+        </if>
+        <if test="bookName != null and bookName != '' " >
+            and t1.bookName like concat('%',#{bookName},'%')
+        </if>
+        <if test="bookAuthor != null and bookAuthor != '' " >
+            and t1.bookAuthor like concat('%',#{bookAuthor},'%')
         </if>
     </select>
 <!--    修改商品库存量（借阅图书）-->

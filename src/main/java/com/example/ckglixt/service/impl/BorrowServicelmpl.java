@@ -185,6 +185,7 @@ public class BorrowServicelmpl implements borrowService {
             int cntInt = Integer.parseInt(listCnt.get(i));
             listCntInt.add(cntInt);
         }
+        //查询已借书数量
         /**
          * 还书
          */
@@ -249,7 +250,7 @@ public class BorrowServicelmpl implements borrowService {
         /**
          * 将列表信息装入List中
          */
-        List<BorrowDTO> borrowDTOList = borrowMapper.listBorrow(borrowDTO,borrowDTO.getUserName());
+        List<BorrowDTO> borrowDTOList = borrowMapper.listBorrow(borrowDTO,borrowDTO.getUserName(),borrowDTO.getBookAuthor(),borrowDTO.getBookName());
         //包装list
         PageInfo<BorrowDTO> borrowDTOPageInfo = new PageInfo<>(borrowDTOList);
         if(borrowDTOList.size() == 0){
